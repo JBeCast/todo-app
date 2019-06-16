@@ -9,3 +9,6 @@ build
 # misc
 .DS_Store
 npm-debug.log
+
+# Cypress
+cypress/integration/examples

@@ -2,12 +2,12 @@
   "todos": [
     {
       "text": "Hello world",
-      "completed": false,
+      "completed": true,
       "id": 3
     },
     {
       "id": 4,
-      "completed": true,
+      "completed": false,
       "text": "Goodnight moon"
     }
   ]

@@ -1,10 +1,10 @@
-import React from 'react'
-import Header from '../containers/Header'
-import MainSection from '../containers/MainSection'
+import React from 'react';
+import Header from '../containers/Header';
+import MainSection from '../containers/MainSection';
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.store.dispatch({type: 'FETCH_TODOS'})
+    this.props.store.dispatch({ type: 'FETCH_TODOS' });
   }
 
   render() {
@@ -13,8 +13,8 @@ class App extends React.Component {
         <Header />
         <MainSection />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
