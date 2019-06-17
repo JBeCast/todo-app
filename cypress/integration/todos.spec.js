@@ -53,4 +53,20 @@ describe('Todo application', () => {
       'Another awesome task'
     );
   });
+
+  it('modifies a task', () => {
+    cy.server();
+    cy.route('PUT', /\/api\/todos\/\d+/, '');
+
+    cy.get('[data-cy=todo-item-5] > .view > label').dblclick();
+
+    cy.get('input.edit').type(
+      '{backspace}{backspace}{backspace}{backspace}{backspace}{enter}'
+    );
+
+    cy.get('[data-cy=todo-item-5] > .view > label').should(
+      'have.text',
+      'Another awesome'
+    );
+  });
 });
