@@ -69,4 +69,22 @@ describe('Todo application', () => {
       'Another awesome'
     );
   });
+
+  it('removes a task', () => {
+    cy.server();
+    cy.route('DELETE', /\/api\/todos\/\d+/, '');
+
+    cy.get('[data-cy^=todo-item-]')
+      .its('length')
+      .should('eq', 3);
+
+    cy.get('[data-cy=todo-item-5] .destroy').should('not.be.visible');
+    cy.get('[data-cy=todo-item-5] .destroy').invoke('show');
+    cy.get('[data-cy=todo-item-5] .destroy').should('be.visible');
+    cy.get('[data-cy=todo-item-5] .destroy').click();
+
+    cy.get('[data-cy^=todo-item-]')
+      .its('length')
+      .should('eq', 2);
+  });
 });
