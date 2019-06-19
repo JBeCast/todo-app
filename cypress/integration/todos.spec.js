@@ -25,6 +25,27 @@ describe('Todo application', () => {
       .should('be.checked');
   });
 
+  it('has a store with valid initial state', () => {
+    cy.window()
+      .its('store')
+      .invoke('getState')
+      .should('deep.equal', {
+        todos: [
+          {
+            id: 3,
+            completed: false,
+            text: 'Hello world',
+          },
+          {
+            id: 4,
+            completed: true,
+            text: 'Goodnight moon',
+          },
+        ],
+        visibilityFilter: 'show_all',
+      });
+  });
+
   it('toggles completed state when clicking the checkbox', () => {
     cy.get('[data-cy=todo-item-3]')
       .as('item3')
