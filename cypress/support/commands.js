@@ -23,3 +23,28 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+/* eslint-disable no-undef */
+
+Cypress.Commands.add('store', (stateName = '') => {
+  const log = Cypress.log({ name: 'store' });
+  const cb = state => {
+    log.set({
+      message: JSON.stringify(state),
+      consoleProps: () => state,
+    });
+    return state; // return state so we can chain cy commands
+  };
+
+  return cy
+    .window({ log: false })
+    .then($window => $window.store.getState())
+    .then(state =>
+      stateName.length > 0
+        ? cy
+            .wrap(state, { log: false }) // wrap so we can chain cy methods
+            .its(stateName)
+            .then(cb)
+        : cy.wrap(state, { log: false }).then(cb)
+    );
+});

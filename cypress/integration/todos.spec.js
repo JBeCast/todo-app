@@ -26,24 +26,18 @@ describe('Todo application', () => {
   });
 
   it('has a store with valid initial state', () => {
-    cy.window()
-      .its('store')
-      .invoke('getState')
-      .should('deep.equal', {
-        todos: [
-          {
-            id: 3,
-            completed: false,
-            text: 'Hello world',
-          },
-          {
-            id: 4,
-            completed: true,
-            text: 'Goodnight moon',
-          },
-        ],
-        visibilityFilter: 'show_all',
-      });
+    cy.store('todos').should('deep.equal', [
+      {
+        id: 3,
+        completed: false,
+        text: 'Hello world',
+      },
+      {
+        id: 4,
+        completed: true,
+        text: 'Goodnight moon',
+      },
+    ]);
   });
 
   it('toggles completed state when clicking the checkbox', () => {
