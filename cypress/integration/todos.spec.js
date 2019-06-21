@@ -38,6 +38,14 @@ describe('Todo application', () => {
         text: 'Goodnight moon',
       },
     ]);
+
+    // Trying out our lodash wrapper custom command
+    cy.store('todos')
+      .lo_find(todo => todo.id === 3)
+      .lo_pick('text')
+      .should('deep.equal', {
+        text: 'Hello world',
+      });
   });
 
   it('toggles completed state when clicking the checkbox', () => {
