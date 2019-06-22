@@ -54,7 +54,7 @@ const loMethods = _.functions(_).map(fn => `lo_${fn}`);
 
 loMethods.forEach(loFn => {
   const loName = loFn.replace(/^lo_/, '');
-  Cypress.Commands.add(loFn, { prevSubject: true }, (subject, fn, ...args) => {
+  Cypress.Commands.add(loFn, { prevSubject: true }, (subject, fn) => {
     const result = _[loName](subject, fn);
     Cypress.log({
       name: loFn,
